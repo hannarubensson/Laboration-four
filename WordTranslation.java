@@ -3,7 +3,7 @@ import java.lang.String;
 
 /**
  * GLOSÖVNING
- * Ett program där man övar på glosor och får feedback
+ * Ett program där man övar på glosor och får feedback.
  * Vid rätt översättning får man 1 poäng, vid över 75% rätt
  * får man information om vad det rätta svaret var.
  * Om man har fel får man 0 poäng.
@@ -18,21 +18,10 @@ public class WordTranslation {
             "Snäll" };
     private String[] englishWords = { "Car", "House", "Run", "Blue", "Bake", "Jump", "Swim", "Moon", "Road", "Kind" };
     private int correctCounter = 0;
-    private String swedishWord;
-    private String englishWord;
-    private String translationInput;
 
-    /** Tom metod för att starta programmet */
+    /** Tom konstruktor för att starta programmet */
 
     public WordTranslation() {
-    }
-
-    /** Konstruktors */
-
-    public WordTranslation(String swedishWord, String englishWord, String translationInput) {
-        this.swedishWord = swedishWord;
-        this.englishWord = englishWord;
-        this.translationInput = translationInput;
     }
 
     /**
@@ -62,7 +51,7 @@ public class WordTranslation {
         int length = swedishWords.length;
 
         for (int i = 0; i < length; i++) {
-            System.out.println(swedishWords[i] + " : ");
+            System.out.println(swedishWords[i] + ": ");
             String translationInput = scan.nextLine();
 
             if (translationInput.equalsIgnoreCase("Q") || i == 10) {
@@ -107,6 +96,9 @@ public class WordTranslation {
     public boolean countLetters(String[] englishWords, String translationInput, int index) {
         String correctWord = englishWords[index];
         int correctLetters = 0;
+
+        // Om inmatningen är kortare än det verkliga ordet blir det fel.
+        // Om inmatningen är längre än det verkliga ordet blir det nästan rätt
         int length = Math.min(translationInput.length(), correctWord.length());
 
         for (int i = 0; i < length; i++) {
@@ -117,7 +109,13 @@ public class WordTranslation {
 
         double percentCorrect = (double) correctLetters / correctWord.length();
 
-        return percentCorrect >= 0.75;
+        if (percentCorrect >= 0.75) {
+            return true;
+
+        } else {
+            return false;
+        }
+
     }
 
     /**
